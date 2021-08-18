@@ -1,7 +1,10 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using SmartPeriod.Core;
+
+using System;
 
 namespace SmartPeriod.Tests
 {
@@ -13,7 +16,7 @@ namespace SmartPeriod.Tests
         [TestInitialize]
         public void TestInit()
         {
-            _period = new Period(new DateTime(2013, 5 , 10, 5 , 40, 30), new DateTime(2014, 10, 20, 10, 50 , 40));
+            _period = new Period(new DateTime(2013, 5, 10, 5, 40, 30), new DateTime(2014, 10, 20, 10, 50, 40));
         }
 
         [TestMethod]

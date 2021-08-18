@@ -1,25 +1,33 @@
-﻿using System;
-using FluentAssertions;
+﻿using FluentAssertions;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using SmartPeriod.Core;
+
+using System;
 
 namespace SmartPeriod.Tests
 {
     [TestClass]
     public class PeriodFormatterTests
     {
-        private Core.Period CreatePeriod(DateTime endDate, DateTime startDate)
-        {            
-            return new Core.Period(startDate, endDate);
+        private Period CreatePeriod(DateTime endDate, DateTime startDate)
+        {
+            return new Period(startDate, endDate);
         }
 
+        [TestMethod]
+        public void Test()
+        {
+            Assert.IsTrue(true);
+        }
         [TestMethod]
         public void Should_Format_Date_With_A_Exact_Year_Correctly()
         {
             var aDate = new DateTime(2013, 12, 12);
             var aDateYearAgo = new DateTime(2012, 12, 12);
 
-            CreatePeriod(aDate, aDateYearAgo).ToString(PeriodFormatter.Years().Months().Days()).Should().Be("1 year");                        
+            CreatePeriod(aDate, aDateYearAgo).ToString(PeriodFormatter.Years().Months().Days()).Should().Be("1 year");
         }
 
         [TestMethod]
@@ -30,14 +38,14 @@ namespace SmartPeriod.Tests
 
             CreatePeriod(aDate, aDateYearAgo).ToString(PeriodFormatter.Months()).Should().Be("13 months");
         }
-        
+
         [TestMethod]
         public void Should_Format_Date_With_Two_Years_Correctly()
         {
             var aDate = new DateTime(2014, 2, 2);
             var aDateTwoYearsAgo = new DateTime(2012, 2, 2);
 
-            CreatePeriod(aDate, aDateTwoYearsAgo).ToString(PeriodFormatter.Years().Months().Days()).Should().Be("2 years");            
+            CreatePeriod(aDate, aDateTwoYearsAgo).ToString(PeriodFormatter.Years().Months().Days()).Should().Be("2 years");
         }
 
         [TestMethod]
@@ -49,17 +57,17 @@ namespace SmartPeriod.Tests
             CreatePeriod(aDate, anotherDate).ToString(PeriodFormatter.Date()).Should().Be("11 months");
         }
 
-        
+
         [TestMethod]
         public void Should_Format_Date_With_A_Month_Properly()
         {
             var aDate = new DateTime(2014, 2, 2);
             var anotherDate = new DateTime(2014, 1, 2);
 
-            CreatePeriod(aDate, anotherDate).ToString(PeriodFormatter.Date()).Should().Be("1 month");            
+            CreatePeriod(aDate, anotherDate).ToString(PeriodFormatter.Date()).Should().Be("1 month");
         }
 
-        
+
         [TestMethod]
         public void Should_Format_Date_With_A_Day_Properly()
         {
@@ -69,7 +77,7 @@ namespace SmartPeriod.Tests
             CreatePeriod(aDate, anotherDate).ToString(PeriodFormatter.Date()).Should().Be("1 day");
         }
 
-        
+
         [TestMethod]
         public void Should_Format_Date_With_Days_Properly()
         {
@@ -79,17 +87,17 @@ namespace SmartPeriod.Tests
             CreatePeriod(aDate, anotherDate).ToString(PeriodFormatter.Date()).Should().Be("2 days");
         }
 
-        
+
         [TestMethod]
         public void Should_Format_Date_With_A_Hour_Properly()
         {
             var aDate = new DateTime(2014, 10, 4);
             var anotherDate = aDate.AddHours(-1);
 
-            CreatePeriod(aDate, anotherDate).ToString(PeriodFormatter.Time()).Should().Be("1 hour");            
+            CreatePeriod(aDate, anotherDate).ToString(PeriodFormatter.Time()).Should().Be("1 hour");
         }
 
-        
+
         [TestMethod]
         public void Should_Format_Date_With_Hours_Properly()
         {
@@ -99,7 +107,7 @@ namespace SmartPeriod.Tests
             CreatePeriod(aDate, anotherDate).ToString(PeriodFormatter.Time()).Should().Be("2 hours");
         }
 
-        
+
         [TestMethod]
         public void Should_Format_Date_With_A_Minute_Properly()
         {
@@ -109,7 +117,7 @@ namespace SmartPeriod.Tests
             CreatePeriod(aDate, anotherDate).ToString(PeriodFormatter.Time()).Should().Be("1 minute");
         }
 
-        
+
         [TestMethod]
         public void Should_Format_Date_With_Minutes_Properly()
         {
@@ -119,7 +127,7 @@ namespace SmartPeriod.Tests
             CreatePeriod(aDate, anotherDate).ToString(PeriodFormatter.Time()).Should().Be("2 minutes");
         }
 
-        
+
         [TestMethod]
         public void Should_Format_Date_With_A_Second_Properly()
         {
@@ -128,7 +136,7 @@ namespace SmartPeriod.Tests
 
             CreatePeriod(aDate, anotherDate).ToString(PeriodFormatter.Time()).Should().Be("1 second");
         }
-        
+
         [TestMethod]
         public void Should_Format_Date_With_Seconds_Properly()
         {
@@ -137,7 +145,7 @@ namespace SmartPeriod.Tests
 
             CreatePeriod(aDate, anotherDate).ToString(PeriodFormatter.Time()).Should().Be("2 seconds");
         }
-        
+
         [TestMethod]
         public void Should_Format_Full_Date_Correctly()
         {
@@ -195,8 +203,8 @@ namespace SmartPeriod.Tests
         [TestMethod]
         public void Time_Should_Be_A_ShortCut_For_Year_Month_Second_Hour_Minute_Second()
         {
-            var aDate = new DateTime(2013, 12, 12,3,2,1);
-            var aDateYearAgo = new DateTime(2012, 12, 12,6,5,4);
+            var aDate = new DateTime(2013, 12, 12, 3, 2, 1);
+            var aDateYearAgo = new DateTime(2012, 12, 12, 6, 5, 4);
 
             var full = CreatePeriod(aDate, aDateYearAgo).ToString(PeriodFormatter.DateTime());
             var shortCut = CreatePeriod(aDate, aDateYearAgo).ToString(PeriodFormatter.Date().Time());
@@ -219,7 +227,7 @@ namespace SmartPeriod.Tests
             var aDate = new DateTime(2012, 7, 9);
             var anotherDate = new DateTime(2012, 3, 3);
 
-            CreatePeriod(aDate, anotherDate).ToString(PeriodFormatter.Years().Months().Days().ShowOnlyMoreSignificant()).Should().Be("4 months");   
+            CreatePeriod(aDate, anotherDate).ToString(PeriodFormatter.Years().Months().Days().ShowOnlyMoreSignificant()).Should().Be("4 months");
         }
 
         [TestMethod]
